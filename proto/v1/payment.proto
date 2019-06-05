@@ -1,0 +1,178 @@
+syntax = "proto3";
+
+package beget.payment.v1.payment;
+import "google/api/annotations.proto";
+import "payment/proto/v1/structures.proto";
+
+
+service PaymentService {
+    // Получить доступные способы оплаты
+    rpc getAvailableTypes (GetAvailableTypesRequest) returns (GetAvailableTypesResponse) {
+        option (google.api.http) = {
+            get: "/v1/payment/availableTypes"
+        };
+    }
+
+    // получить цены за некоторые периоды, в том числе за годовые скидки итд
+    rpc getPeriodsCosts (GetPeriodsCostsRequest) returns (GetPeriodsCostsResponse) {
+        option (google.api.http) = {
+            get: "/v1/payment/periodsCosts"
+        };
+    }
+
+    // получить список персон для типов платежей, которые требуют заполнения данных
+    rpc getPersons (GetPersonsRequest) returns (GetPersonsResponse) {
+        option (google.api.http) = {
+            get: "/v1/payment/person"
+        };
+    }
+
+    // выставить счёт
+    rpc create (CreateRequest) returns (CreateResponse) {
+        option (google.api.http) = {
+            post: "/v1/payment"
+            body: "*"
+        };
+    }
+}
+message GetAvailableTypesRequest {
+}
+message GetAvailableTypesResponse {
+    repeated PaymentMethod method = 1;
+
+    message PaymentMethod {
+        structures.Currency currency = 1;
+        repeated structures.AccountType account_type = 2;
+        structures.AccountType default_account_type = 3;
+        structures.PaymentType type = 4;
+    }
+}
+
+message GetPeriodsCostsRequest {
+    // необходимые периоды в месяцах
+    repeated uint32 months = 1;
+    // магия для подсчета цены на впс, когда она ещё не подключена
+    repeated string option_template = 2;
+}
+message GetPeriodsCostsResponse {
+    repeated Period period = 1;
+    message Period {
+        float amount = 1;
+        structures.Currency currency = 2;
+        uint32 months = 3;
+        // услуги, которые будут продлены в указанное количество месяцев
+        repeated Option option_to_renew = 4;
+
+        message Option {
+            string type = 1;
+            string name = 2;
+            float rate = 3;
+        }
+    }
+}
+
+message GetPersonsRequest {
+}
+message GetPersonsResponse {
+    repeated PersonPerson person_person = 1;
+    repeated OrgPerson org_person = 2;
+
+    message PersonPerson {
+        string address = 1;
+        string name = 2;
+    }
+    message OrgPerson {
+        string address = 1;
+        string name = 2;
+        string taxpayer_number = 3;
+        string kpp = 4;
+        string phone = 5;
+    }
+}
+
+message CreateRequest {
+    float amount = 1;
+    structures.PaymentType type = 2;
+    structures.Currency currency = 3;
+    structures.AccountType account_type = 4;
+
+    oneof params {
+        BillParams bill = 5;
+        LiqpayParams liqpay = 6;
+        PaypalParams paypal = 7;
+        RbkParams rbk = 8;
+        ReceiptParams receipt = 9;
+        RobokassaParams robokassa = 10;
+        YandexParams yandex = 11;
+    }
+
+
+    message BillParams {
+        string address = 1;
+        string name = 2;
+        string taxpayer_number = 3;
+        string kpp = 4;
+        string phone = 5;
+        // в месяцах период автоотправки счёта пользователю
+        uint32 repeat_in_months = 6;
+    }
+    message LiqpayParams {
+        Method method = 1;
+        enum Method {
+            CARD = 0;
+            LIQPAY = 1;
+            DELAYED = 2;
+        }
+    }
+    message PaypalParams {
+    }
+    message RbkParams {
+    }
+    message ReceiptParams {
+        string address = 1;
+        string name = 2;
+        // в месяцах период автоотправки квитанции пользователю
+        uint32 repeat_in_months = 3;
+    }
+    message RobokassaParams {
+    }
+    message YandexParams {
+        Method method = 1;
+        // NOT NONE only for Method.CARD
+        structures.RecurringPeriod period = 2;
+
+        enum Method {
+            YANDEX_WALLET = 0; // aka PC
+            WEBMONEY = 1; // aka WM
+            CARD = 2; // aka AC
+        }
+    }
+}
+message CreateResponse {
+    oneof result {
+        PaymentLocation location = 1;
+        Error error = 2;
+    }
+
+    message PaymentLocation {
+        string url = 1;
+        // body для post, parameters для get
+        string data = 2;
+
+        enum Method {
+            GET = 0;
+            POST = 1;
+            NONE = 2;
+        }
+    }
+    message Error {
+        Code code = 1;
+        string message = 2;
+
+        enum Code {
+            _ = 0;
+            UNAVAILABLE_METHOD = 1;
+        }
+    }
+}
+

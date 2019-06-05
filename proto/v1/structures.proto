@@ -1,0 +1,34 @@
+syntax = 'proto3';
+
+package beget.payment.v1.structures;
+
+enum RecurringPeriod {
+    NONE = 0;
+    MONTH = 1;
+    YEAR = 2;
+    TWO_YEARS = 3;
+}
+
+enum Currency {
+    RUR = 0;
+    UAH = 1;
+}
+
+enum AccountType {
+    PERSON = 0;
+    ORG = 1;
+}
+
+enum PaymentType {
+    BILL = 0;
+    LIQPAY = 1;
+    PAYPAL = 2;
+    RBK = 3;
+    RECEIPT = 4; // aka sberbank
+    ROBOKASSA = 5; // aka emoney
+    TERMINAL = 6; // aka qiwi
+    TERMINAL_UA = 7; // aka comepay
+    YANDEX_WALLET = 8; // aka yandex
+    YANDEX_CARD = 9;
+    YANDEX_WEBMONEY = 10;
+}

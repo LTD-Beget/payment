@@ -1,0 +1,76 @@
+syntax = "proto3";
+
+package beget.payment.v1.recurring;
+import "google/api/annotations.proto";
+import "payment/proto/v1/structures.proto";
+
+service RecurringService {
+    // получить текущее состояние повторяемых платежей
+    rpc getInfo (GetInfoRequest) returns (GetInfoResponse) {
+        option (google.api.http) = {
+            get: "/v1/payment/recurring"
+        };
+    }
+
+    // отключить повторяемый платеж
+    rpc disable (DisableRequest) returns (DisableResponse) {
+        option (google.api.http) = {
+            delete: "/v1/payment/recurring"
+        };
+    }
+
+    // получить историю по списаниям
+    rpc getHistory (GetHistoryRequest) returns (GetHistoryResponse) {
+        option (google.api.http) = {
+            get: "/v1/payment/recurring/history"
+        };
+    }
+}
+message GetInfoRequest {
+}
+message GetInfoResponse {
+    oneof state {
+        NotBinded not_binded = 1;
+        Binded binded = 2;
+    }
+    message NotBinded {
+    }
+    message Binded {
+        Status status = 1;
+        structures.RecurringPeriod period = 2;
+        uint32 fail_charges = 3;
+        string card = 4;
+
+        enum Status {
+            INACTIVE = 0;
+            ACTIVE = 1;
+            DISABLED = 2;
+        }
+    }
+}
+
+message DisableRequest {
+    // ok?
+}
+message DisableResponse {
+    // ok!
+}
+
+message GetHistoryRequest {
+}
+message GetHistoryResponse {
+    repeated Charge charge = 1;
+
+    message Charge {
+        structures.RecurringPeriod period = 1;
+        Status status = 2;
+        string date = 3; // Y-m-d. Dont forget to format for humans
+        float amount = 4;
+        string card = 5;
+
+        enum Status {
+            SUCCESS = 0;
+            FAIL = 1;
+        }
+    }
+}
