@@ -65,13 +65,14 @@ message GetHistoryResponse {
     message Charge {
         structures.RecurringPeriod period = 1;
         Status status = 2;
-        string date = 3; // Y-m-d. Dont forget to format for humans
+        string processed_at = 3; // W3C
         float amount = 4;
         string card = 5;
 
         enum Status {
-            SUCCESS = 0;
-            FAIL = 1;
+            SUCCESS = 0; // Успешно
+            FAIL = 1; // Произошла ошибка
+            DISABLE = 2; // Карта отключена
         }
     }
 }
