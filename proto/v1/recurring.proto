@@ -29,9 +29,12 @@ service RecurringService {
 message GetInfoRequest {
 }
 message GetInfoResponse {
+    // было когда-то подключено. Значит и история может быть
+    bool was_used = 1;
+
     oneof state {
-        NotBinded not_binded = 1;
-        Binded binded = 2;
+        NotBinded not_binded = 2;
+        Binded binded = 3;
     }
     message NotBinded {
     }
