@@ -7,23 +7,24 @@ import "payment/proto/v1/structures.proto";
 
 service PaymentService {
     // Получить доступные способы оплаты
-    rpc getAvailableTypes (GetAvailableTypesRequest) returns (GetAvailableTypesResponse) {
+    rpc getMethods (GetMethodsRequest) returns (GetMethodsResponse) {
         option (google.api.http) = {
-            get: "/v1/payment/availableTypes"
+            get: "/v1/payment/method"
         };
     }
 
     // получить цены за некоторые периоды, в том числе за годовые скидки итд
-    rpc getPeriodsCosts (GetPeriodsCostsRequest) returns (GetPeriodsCostsResponse) {
+    rpc calculate (CalculateRequest) returns (CalculateResponse) {
         option (google.api.http) = {
-            get: "/v1/payment/periodsCosts"
+            post: "/v1/payment/calculator"
+            body: "*"
         };
     }
 
-    // получить список персон для типов платежей, которые требуют заполнения данных
-    rpc getPersons (GetPersonsRequest) returns (GetPersonsResponse) {
+    // получить список данных платильщиков для типов платежей, которые требуют заполнения данных
+    rpc getPayers (GetPayersRequest) returns (GetPayersResponse) {
         option (google.api.http) = {
-            get: "/v1/payment/person"
+            get: "/v1/payment/payer"
         };
     }
 
@@ -35,9 +36,9 @@ service PaymentService {
         };
     }
 }
-message GetAvailableTypesRequest {
+message GetMethodsRequest {
 }
-message GetAvailableTypesResponse {
+message GetMethodsResponse {
     repeated PaymentMethod method = 1;
 
     message PaymentMethod {
@@ -48,13 +49,13 @@ message GetAvailableTypesResponse {
     }
 }
 
-message GetPeriodsCostsRequest {
+message CalculateRequest {
     // необходимые периоды в месяцах
     repeated uint32 months = 1;
     // магия для подсчета цены на впс, когда она ещё не подключена
     repeated string option_template = 2;
 }
-message GetPeriodsCostsResponse {
+message CalculateResponse {
     repeated Period period = 1;
     message Period {
         float amount = 1;
@@ -64,24 +65,24 @@ message GetPeriodsCostsResponse {
         repeated Option option_to_renew = 4;
 
         message Option {
-            string type = 1;
-            string name = 2;
+            string type = 1; // системное название
+            string name = 2; // человекочитаемое
             float rate = 3;
         }
     }
 }
 
-message GetPersonsRequest {
+message GetPayersRequest {
 }
-message GetPersonsResponse {
-    repeated PersonPerson person_person = 1;
-    repeated OrgPerson org_person = 2;
+message GetPayersResponse {
+    repeated PersonPayer person_payer = 1;
+    repeated OrgPayer org_payer = 2;
 
-    message PersonPerson {
+    message PersonPayer {
         string address = 1;
         string name = 2;
     }
-    message OrgPerson {
+    message OrgPayer {
         string address = 1;
         string name = 2;
         string taxpayer_number = 3;
@@ -117,8 +118,8 @@ message CreateRequest {
         uint32 repeat_in_months = 6;
     }
     message LiqpayParams {
-        Method method = 1;
-        enum Method {
+        Way way = 1;
+        enum Way {
             CARD = 0;
             LIQPAY = 1;
             DELAYED = 2;
@@ -137,11 +138,11 @@ message CreateRequest {
     message RobokassaParams {
     }
     message YandexParams {
-        Method method = 1;
+        Way way = 1;
         // NOT NONE only for Method.CARD
         structures.RecurringPeriod period = 2;
 
-        enum Method {
+        enum Way {
             YANDEX_WALLET = 0; // aka PC
             WEBMONEY = 1; // aka WM
             CARD = 2; // aka AC
