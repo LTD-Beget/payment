@@ -13,7 +13,7 @@ service RecurringService {
     }
 
     // отключить повторяемый платеж
-    rpc disable (DisableRequest) returns (DisableResponse) {
+    rpc unbind (UnbindRequest) returns (UnbindResponse) {
         option (google.api.http) = {
             delete: "/v1/payment/recurring"
         };
@@ -44,16 +44,14 @@ message GetInfoResponse {
         enum Status {
             INACTIVE = 0;
             ACTIVE = 1;
-            DISABLED = 2;
         }
     }
 }
 
-message DisableRequest {
-    // ok?
+message UnbindRequest {
 }
-message DisableResponse {
-    // ok!
+message UnbindResponse {
+    // OK
 }
 
 message GetHistoryRequest {
