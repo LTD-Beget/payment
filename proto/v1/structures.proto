@@ -23,12 +23,11 @@ enum PaymentType {
     BILL = 0;
     LIQPAY = 1;
     PAYPAL = 2;
-    RBK = 3;
-    RECEIPT = 4; // aka sberbank
-    ROBOKASSA = 5; // aka emoney
-    TERMINAL = 6; // aka qiwi
-    TERMINAL_UA = 7; // aka comepay
-    YANDEX_WALLET = 8; // aka yandex
-    YANDEX_CARD = 9;
-    YANDEX_WEBMONEY = 10;
+    RECEIPT = 3; // aka sberbank
+    ROBOKASSA = 4; // aka emoney
+    TERMINAL = 5; // aka qiwi
+    TERMINAL_UA = 6; // aka comepay
+    YANDEX_WALLET = 7; // aka yandex
+    YANDEX_CARD = 8;
+    YANDEX_WEBMONEY = 9;
 }
