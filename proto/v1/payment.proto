@@ -101,10 +101,9 @@ message CreateRequest {
         BillParams bill = 5;
         LiqpayParams liqpay = 6;
         PaypalParams paypal = 7;
-        RbkParams rbk = 8;
-        ReceiptParams receipt = 9;
-        RobokassaParams robokassa = 10;
-        YandexParams yandex = 11;
+        ReceiptParams receipt = 8;
+        RobokassaParams robokassa = 9;
+        YandexParams yandex = 10;
     }
 
 
@@ -126,8 +125,6 @@ message CreateRequest {
         }
     }
     message PaypalParams {
-    }
-    message RbkParams {
     }
     message ReceiptParams {
         string address = 1;
