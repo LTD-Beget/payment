@@ -154,8 +154,8 @@ message CreateResponse {
 
     message PaymentLocation {
         string url = 1;
-        // body для post, parameters для get
-        string data = 2;
+        // kv for form
+        map<string, string> data = 2;
 
         enum Method {
             GET = 0;
