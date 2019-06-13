@@ -93,17 +93,16 @@ message GetPayersResponse {
 
 message CreateRequest {
     uint32 amount = 1;
-    structures.PaymentType type = 2;
-    structures.Currency currency = 3;
-    structures.AccountType account_type = 4;
+    structures.Currency currency = 2;
+    structures.AccountType account_type = 3;
 
     oneof params {
-        BillParams bill = 5;
-        LiqpayParams liqpay = 6;
-        PaypalParams paypal = 7;
-        ReceiptParams receipt = 8;
-        RobokassaParams robokassa = 9;
-        YandexParams yandex = 10;
+        BillParams bill = 4;
+        LiqpayParams liqpay = 5;
+        PaypalParams paypal = 6;
+        ReceiptParams receipt = 7;
+        RobokassaParams robokassa = 8;
+        YandexParams yandex = 9;
     }
 
 
