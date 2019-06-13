@@ -92,7 +92,7 @@ message GetPayersResponse {
 }
 
 message CreateRequest {
-    float amount = 1;
+    uint32 amount = 1;
     structures.PaymentType type = 2;
     structures.Currency currency = 3;
     structures.AccountType account_type = 4;
@@ -170,6 +170,8 @@ message CreateResponse {
         enum Code {
             _ = 0;
             UNAVAILABLE_METHOD = 1;
+            UNAVAILABLE_ACCOUNT_TYPE = 2;
+            INCORRECT_AMOUNT = 3;
         }
     }
 }
