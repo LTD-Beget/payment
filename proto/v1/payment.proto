@@ -68,6 +68,7 @@ message CalculateResponse {
             string type = 1; // системное название
             string name = 2; // человекочитаемое
             float rate = 3;
+            string renews_at = 4; // W3C
         }
     }
 }
