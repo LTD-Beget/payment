@@ -10,7 +10,7 @@ enum RecurringPeriod {
 }
 
 enum Currency {
-    RUR = 0;
+    RUB = 0;
     UAH = 1;
 }
 
