@@ -56,19 +56,35 @@ message CalculateRequest {
     repeated string option_template = 2;
 }
 message CalculateResponse {
-    repeated Period period = 1;
-    message Period {
-        float amount = 1;
-        structures.Currency currency = 2;
-        uint32 months = 3;
-        // услуги, которые будут продлены в указанное количество месяцев
-        repeated Option option_to_renew = 4;
+    oneof result {
+        Success success = 1;
+        Error error = 2;
+    }
+    message Success {
+        repeated Period period = 1;
+        message Period {
+            uint32 amount = 1;
+            structures.Currency currency = 2;
+            uint32 months = 3;
+            // услуги, которые будут продлены в указанное количество месяцев
+            repeated Option option_to_renew = 4;
 
-        message Option {
-            string type = 1; // системное название
-            string name = 2; // человекочитаемое
-            float rate = 3;
-            string renews_at = 4; // W3C
+            message Option {
+                string type = 1; // системное название
+                string name = 2; // человекочитаемое
+                float rate = 3;
+                string renews_at = 4; // W3C
+            }
+        }
+    }
+    message Error {
+        Code code = 1;
+        string message = 2;
+
+        enum Code {
+            _ = 0;
+            INVALID_PERIOD = 1;
+            INVALID_OPTION_TEMPLATE = 2;
         }
     }
 }
@@ -171,7 +187,8 @@ message CreateResponse {
             _ = 0;
             UNAVAILABLE_METHOD = 1;
             UNAVAILABLE_ACCOUNT_TYPE = 2;
-            INCORRECT_AMOUNT = 3;
+            INVALID_AMOUNT = 3;
+            INVALID_PERIOD = 4;
         }
     }
 }
