@@ -134,6 +134,9 @@ message CreateRequest {
     }
     message LiqpayParams {
         Way way = 1;
+        // NOT NONE only for Way.CARD
+        structures.RecurringPeriod period = 2;
+
         enum Way {
             CARD = 0;
             LIQPAY = 1;
@@ -152,7 +155,7 @@ message CreateRequest {
     }
     message YandexParams {
         Way way = 1;
-        // NOT NONE only for Method.CARD
+        // NOT NONE only for Way.CARD
         structures.RecurringPeriod period = 2;
 
         enum Way {
