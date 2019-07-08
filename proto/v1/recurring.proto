@@ -39,9 +39,10 @@ message GetInfoResponse {
     message NotBinded {
     }
     message Binded {
-        structures.RecurringPeriod period = 1;
-        uint32 fail_charges = 2;
-        string card = 3;
+        Provider provider = 1;
+        structures.RecurringPeriod period = 2;
+        uint32 fail_charges = 3;
+        string card = 4;
     }
 }
 
@@ -68,4 +69,9 @@ message GetHistoryResponse {
             FAIL = 1; // Произошла ошибка
         }
     }
+}
+
+enum Provider {
+    YANDEX = 0;
+    LIQPAY = 1;
 }
