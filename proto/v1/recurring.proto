@@ -39,15 +39,9 @@ message GetInfoResponse {
     message NotBinded {
     }
     message Binded {
-        Status status = 1;
-        structures.RecurringPeriod period = 2;
-        uint32 fail_charges = 3;
-        string card = 4;
-
-        enum Status {
-            INACTIVE = 0;
-            ACTIVE = 1;
-        }
+        structures.RecurringPeriod period = 1;
+        uint32 fail_charges = 2;
+        string card = 3;
     }
 }
 
@@ -72,7 +66,6 @@ message GetHistoryResponse {
         enum Status {
             SUCCESS = 0; // Успешно
             FAIL = 1; // Произошла ошибка
-            DISABLE = 2; // Карта отключена
         }
     }
 }
