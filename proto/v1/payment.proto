@@ -66,14 +66,29 @@ message CalculateResponse {
             uint32 amount = 1;
             structures.Currency currency = 2;
             uint32 months = 3;
-            // услуги, которые будут продлены в указанное количество месяцев
-            repeated Option option_to_renew = 4;
 
-            message Option {
+            // стоимость чистого тарифа за период
+            float plan_cost = 5;
+
+            // услуги, которые будут продлены в указанное количество месяцев
+            repeated PeriodicOptionCharge option_to_renew = 4;
+
+            // сумированные списания по ежедневным опциям
+            repeated DailyOptionSummary daily_option_cost = 6;
+
+            message PeriodicOptionCharge {
                 string type = 1; // системное название
                 string name = 2; // человекочитаемое
                 float rate = 3;
                 string renews_at = 4; // W3C
+            }
+
+            message DailyOptionSummary {
+                string type = 1; // системное название
+                string name = 2; // человекочитаемое
+                uint64 count = 3; // количество
+                string unit  = 4; // единица измерения
+                float amount = 5; // сумма за период по этой опции
             }
         }
     }
