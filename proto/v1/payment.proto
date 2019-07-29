@@ -113,6 +113,7 @@ message GetPayersResponse {
     message PersonPayer {
         string address = 1;
         string name = 2;
+        bool default = 3;
     }
     message OrgPayer {
         string address = 1;
@@ -120,6 +121,7 @@ message GetPayersResponse {
         string taxpayer_number = 3;
         string kpp = 4;
         string phone = 5;
+        bool default = 6;
     }
 }
 
