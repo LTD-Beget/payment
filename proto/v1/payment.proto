@@ -137,6 +137,7 @@ message CreateRequest {
         ReceiptParams receipt = 7;
         RobokassaParams robokassa = 8;
         YandexParams yandex = 9;
+        FondyParams fondy = 10;
     }
 
 
@@ -180,6 +181,8 @@ message CreateRequest {
             WEBMONEY = 1; // aka WM
             CARD = 2; // aka AC
         }
+    }
+    message FondyParams {
     }
 }
 message CreateResponse {
