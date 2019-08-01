@@ -30,4 +30,5 @@ enum PaymentType {
     YANDEX_WALLET = 7; // aka yandex
     YANDEX_CARD = 8;
     YANDEX_WEBMONEY = 9;
+    FONDY = 10;
 }
