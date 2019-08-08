@@ -63,6 +63,7 @@ message GetHistoryResponse {
         string processed_at = 3; // W3C
         float amount = 4;
         string card = 5;
+        structures.Currency currency = 6;
 
         enum Status {
             SUCCESS = 0; // Успешно
