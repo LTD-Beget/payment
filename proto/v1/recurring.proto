@@ -43,6 +43,7 @@ message GetInfoResponse {
         structures.RecurringPeriod period = 2;
         uint32 fail_charges = 3;
         string card = 4;
+        structures.Currency currency = 5;
     }
 }
 
