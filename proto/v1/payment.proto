@@ -126,7 +126,7 @@ message GetPayersResponse {
 }
 
 message CreateRequest {
-    uint32 amount = 1;
+    double amount = 1;
     structures.Currency currency = 2;
     structures.AccountType account_type = 3;
 
