@@ -19,6 +19,14 @@ service RecurringService {
         };
     }
 
+    // сменить периодичность платежа
+    rpc changePeriod (ChangePeriodRequest) returns (ChangePeriodResponse) {
+        option (google.api.http) = {
+            put: "/v1/payment/recurring/period"
+            body: "*"
+        };
+    }
+
     // получить историю по списаниям
     rpc getHistory (GetHistoryRequest) returns (GetHistoryResponse) {
         option (google.api.http) = {
@@ -31,6 +39,8 @@ message GetInfoRequest {
 message GetInfoResponse {
     // было когда-то подключено. Значит и история может быть
     bool was_used = 1;
+    // достингуто ограничение на число попыток привязки карты
+    bool limit_reached = 4;
 
     oneof state {
         NotBinded not_binded = 2;
@@ -51,6 +61,28 @@ message UnbindRequest {
 }
 message UnbindResponse {
     // OK
+}
+
+message ChangePeriodRequest {
+    structures.RecurringPeriod period = 1;
+}
+message ChangePeriodResponse {
+    oneof result {
+        Success success = 1;
+        Error error = 2;
+    }
+
+    message Success {
+    }
+    message Error {
+        Code code = 1;
+        string message = 2;
+
+        enum Code {
+            _ = 0;
+            INVALID_PERIOD = 1;
+        }
+    }
 }
 
 message GetHistoryRequest {
@@ -76,4 +108,5 @@ message GetHistoryResponse {
 enum Provider {
     YANDEX = 0;
     LIQPAY = 1;
+    CLOUDPAYMENTS = 2;
 }
