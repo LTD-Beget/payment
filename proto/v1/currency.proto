@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package beget.payment.v1.currency;
+import "google/api/annotations.proto";
+import "payment/proto/v1/structures.proto";
+
+service CurrencyService {
+    rpc getExchangeRates (GetExchangeRatesRequest) returns (GetExchangeRatesResponse) {
+        option (google.api.http) = {
+            get: "/v1/payment/currency/rate"
+        };
+    }
+}
+
+message GetExchangeRatesRequest {
+}
+
+message GetExchangeRatesResponse {
+    repeated Rate rate = 1;
+
+    message Rate {
+        // Курс конвертации (стоимость целевой валюты в исходной)
+        float value = 1;
+        // Целевая валюта
+        structures.Currency currency = 2;
+    }
+}
