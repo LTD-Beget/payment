@@ -63,18 +63,22 @@ message CalculateResponse {
     message Success {
         repeated Period period = 1;
         message Period {
+            // общая сумма, необходимая для работы аккаунта на указанный период
             uint32 amount = 1;
             structures.Currency currency = 2;
             uint32 months = 3;
 
-            // стоимость чистого тарифа за период
+            // [детализация] стоимость чистого тарифа за период
             float plan_cost = 5;
 
-            // услуги, которые будут продлены в указанное количество месяцев
+            // [детализация] услуги, которые будут продлены в указанное количество месяцев
             repeated PeriodicOptionCharge option_to_renew = 4;
 
-            // сумированные списания по ежедневным опциям
+            // [детализация] суммированные списания по ежедневным опциям
             repeated DailyOptionSummary daily_option_cost = 6;
+
+            // [детализация] задолженность, которую необходимо погасить
+            float debt = 7;
 
             message PeriodicOptionCharge {
                 string type = 1; // системное название
