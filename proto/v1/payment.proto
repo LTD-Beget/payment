@@ -78,6 +78,7 @@ message CalculateResponse {
             repeated DailyOptionSummary daily_option_cost = 6;
 
             // [детализация] задолженность, которую необходимо погасить
+            // Вычитать из amount с округлением в большую сторону для регулярных платежей
             float debt = 7;
 
             message PeriodicOptionCharge {
