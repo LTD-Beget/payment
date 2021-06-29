@@ -23,7 +23,6 @@ enum AccountType {
 
 enum PaymentType {
     BILL = 0;
-    LIQPAY = 1;
     PAYPAL = 2;
     RECEIPT = 3; // aka sberbank
     ROBOKASSA = 4; // aka emoney
@@ -33,4 +32,8 @@ enum PaymentType {
     YANDEX_CARD = 8;
     YANDEX_WEBMONEY = 9;
     FONDY = 10;
+    LINKED_CARD = 11; // recurring
+    LIQPAY = 1;
+    LIQPAY_CARD = 12;
+    LIQPAY_DELAYED = 13;
 }
