@@ -225,12 +225,13 @@ message CreateRequest {
     enum Source {
         UNKNOWN = 0;
         CP = 1;
-        ANDROID = 2;
-        IOS = 3;
-        ONLINE_BANK = 4;
-        TERMINAL = 5;
-        RECURRING = 6;
-        MANUAL = 7;
+        SITE = 2;
+        ANDROID = 3;
+        IOS = 4;
+        ONLINE_BANK = 5;
+        TERMINAL = 6;
+        RECURRING = 7;
+        MANUAL = 8;
     }
 }
 message CreateResponse {
