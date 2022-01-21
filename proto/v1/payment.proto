@@ -167,6 +167,7 @@ message CreateRequest {
     // идентификатор получателя платежа
     string customer_identifier = 12;
 
+    // источник платежа. По умолчанию UNKNOWN
     Source source = 13;
 
     message LinkedCardParams {
