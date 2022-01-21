@@ -224,14 +224,9 @@ message CreateRequest {
     }
     enum Source {
         UNKNOWN = 0;
-        CP = 1;
-        SITE = 2;
-        ANDROID = 3;
-        IOS = 4;
-        ONLINE_BANK = 5;
-        TERMINAL = 6;
-        RECURRING = 7;
-        MANUAL = 8;
+        CP_PAY = 1;
+        CP_MODAL = 2;
+        SITE = 3;
     }
 }
 message CreateResponse {
