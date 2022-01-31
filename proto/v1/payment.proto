@@ -167,6 +167,9 @@ message CreateRequest {
     // идентификатор получателя платежа
     string customer_identifier = 12;
 
+    // источник платежа. По умолчанию UNKNOWN
+    Source source = 13;
+
     message LinkedCardParams {
     }
 
@@ -219,6 +222,12 @@ message CreateRequest {
     }
     message FondyParams {
         string return_url = 1;
+    }
+    enum Source {
+        UNKNOWN = 0;
+        CP_PAY = 1;
+        CP_MODAL = 2;
+        SITE = 3;
     }
 }
 message CreateResponse {
