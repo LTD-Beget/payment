@@ -101,6 +101,7 @@ message CalculateResponse {
 
             message PeriodicOptionCharge {
                 string type = 1; // системное название
+                string subtype = 5; // подтип опции
                 string name = 2; // человекочитаемое
                 float rate = 3;
                 string renews_at = 4; // W3C
