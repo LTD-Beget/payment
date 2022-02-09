@@ -101,7 +101,6 @@ message CalculateResponse {
 
             message PeriodicOptionCharge {
                 string type = 1; // системное название
-                string subtype = 5; // подтип опции
                 string name = 2; // человекочитаемое
                 float rate = 3;
                 string renews_at = 4; // W3C
@@ -109,6 +108,7 @@ message CalculateResponse {
 
             message DailyOptionSummary {
                 string type = 1; // системное название
+                string subtype = 6; // подтип опции
                 string name = 2; // человекочитаемое
                 uint64 count = 3; // количество
                 string unit  = 4; // единица измерения
