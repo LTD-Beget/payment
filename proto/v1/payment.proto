@@ -60,6 +60,7 @@ message GetMethodsResponse {
         oneof type_details {
             CardDetails card = 6;
         }
+        structures.Country country = 7;
 
         message CardDetails {
             string number = 1;
@@ -163,6 +164,7 @@ message CreateRequest {
         YandexParams yandex = 9;
         FondyParams fondy = 10;
         LinkedCardParams linked_card = 11;
+        CloudPaymentsParams cloudpayments = 14;
     }
 
     // идентификатор получателя платежа
@@ -222,6 +224,9 @@ message CreateRequest {
         }
     }
     message FondyParams {
+        string return_url = 1;
+    }
+    message CloudPaymentsParams {
         string return_url = 1;
     }
     enum Source {
