@@ -228,6 +228,7 @@ message CreateRequest {
     }
     message CloudPaymentsParams {
         string return_url = 1;
+        structures.RecurringPeriod period = 2;
     }
     enum Source {
         UNKNOWN = 0;
