@@ -14,6 +14,7 @@ enum Currency {
     UAH = 1;
     USD = 2;
     EUR = 3;
+    KZT = 4;
 }
 
 enum AccountType {
