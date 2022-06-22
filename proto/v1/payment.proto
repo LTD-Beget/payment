@@ -165,6 +165,7 @@ message CreateRequest {
         FondyParams fondy = 10;
         LinkedCardParams linked_card = 11;
         CloudPaymentsParams cloudpayments = 14;
+        PayBoxParams paybox = 15;
     }
 
     // идентификатор получателя платежа
@@ -229,6 +230,9 @@ message CreateRequest {
     message CloudPaymentsParams {
         string return_url = 1;
         structures.RecurringPeriod period = 2;
+    }
+    message PayBoxParams {
+        string return_url = 1;
     }
     enum Source {
         UNKNOWN = 0;
