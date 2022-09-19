@@ -39,6 +39,7 @@ enum PaymentType {
     LIQPAY_DELAYED = 13;
     CLOUDPAYMENTS = 14;
     PAYBOX = 15;
+    PAYSELECTION = 16;
 }
 
 enum Country {

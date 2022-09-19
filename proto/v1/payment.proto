@@ -166,6 +166,7 @@ message CreateRequest {
         LinkedCardParams linked_card = 11;
         CloudPaymentsParams cloudpayments = 14;
         PayBoxParams paybox = 15;
+        PayselectionParams payselection = 16;
     }
 
     // идентификатор получателя платежа
@@ -233,6 +234,10 @@ message CreateRequest {
     }
     message PayBoxParams {
         string return_url = 1;
+    }
+    message PayselectionParams {
+        string return_url = 1;
+        structures.RecurringPeriod period = 2;
     }
     enum Source {
         UNKNOWN = 0;
