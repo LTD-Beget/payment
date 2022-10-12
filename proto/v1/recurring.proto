@@ -109,4 +109,5 @@ enum Provider {
     YANDEX = 0;
     LIQPAY = 1;
     CLOUDPAYMENTS = 2;
+    PAYSELECTION = 3;
 }
