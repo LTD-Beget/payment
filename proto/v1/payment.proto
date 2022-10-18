@@ -179,13 +179,8 @@ message CreateRequest {
     }
 
     message BillParams {
-        // явная передача данных организации более не поддерживается,
-        // всегда используются текущие данные пользоваетля из профиля
-        string address = 1 [deprecated=true];
-        string name = 2 [deprecated=true];
-        string taxpayer_number = 3 [deprecated=true];
-        string kpp = 4 [deprecated=true];
-        string phone = 5 [deprecated=true];
+        reserved "address", "name", "taxpayer_number", "kpp", "phone";
+        reserved 1, 2, 3, 4, 5;
         // в месяцах период автоотправки счёта пользователю
         uint32 repeat_in_months = 6;
     }
