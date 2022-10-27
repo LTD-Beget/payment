@@ -48,9 +48,3 @@ enum Country {
     RU = 1;
     UA = 2;
 }
-
-enum PaymentStatus {
-    NOT_COFIRMED = 0;
-    CONFIRMED = 1;
-    CANCELED = 2;
-}

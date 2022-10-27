@@ -291,13 +291,26 @@ message CreateResponse {
 message GetStatusRequest {
     reserved 1;
     oneof identifier {
+        // Идентификатор платежа
         uint32 payment_id = 2;
+        // Внешний ID
         string external_id = 3;
     }
+    // Тип платежа
     structures.PaymentType type = 4;
 }
 
 message GetStatusResponse {
-    structures.PaymentStatus status = 1;
+    // Статус платежа
+    Status status = 1;
+
+    enum Status {
+        // Не оплачен
+        NOT_COFIRMED = 0;
+        // Оплачен
+        CONFIRMED = 1;
+        // Отменен
+        CANCELED = 2;
+    }
 }
 
