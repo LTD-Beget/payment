@@ -39,7 +39,7 @@ service PaymentService {
     // получить статус платежа
     rpc getStatus (GetStatusRequest) returns (GetStatusResponse) {
         option (google.api.http) = {
-            get: "/v1/payment/{id}/status"
+            post: "/v1/payment/status"
         };
     }
 }
@@ -167,6 +167,7 @@ message CreateRequest {
         CloudPaymentsParams cloudpayments = 14;
         PayBoxParams paybox = 15;
         PayselectionParams payselection = 16;
+        PaykeeperParams paykeeper = 17;
     }
 
     // идентификатор получателя платежа
@@ -234,6 +235,9 @@ message CreateRequest {
         string return_url = 1;
         structures.RecurringPeriod period = 2;
     }
+    // Оплата через Paykeeeper (СБП)
+    message PaykeeperParams {
+    }
     enum Source {
         UNKNOWN = 0;
         CP_PAY = 1;
@@ -251,7 +255,12 @@ message CreateResponse {
         string url = 1;
         map<string, string> data = 2; // kv for form
         Method method = 3;
+        // ID платежа
         uint32 payment_id = 4;
+        // QR-код для СБП
+        string qr_image = 5;
+        // Внешний ID платежа
+        string external_payment_id = 6;
 
         enum Method {
             GET = 0;
@@ -272,21 +281,22 @@ message CreateResponse {
             // Не удалось списать средства с привязанной карты
             LINKED_CARD_CHARGING_FAILED = 5;
             LINKED_CARD_OUT_OF_LIMIT = 6;
+            // Ошибка внешнего сервиса
+            EXTERNAL_ERROR = 7;
         }
     }
 }
 
 message GetStatusRequest {
-    uint32 id = 1;
+    reserved 1;
+    oneof identifier {
+        uint32 payment_id = 2;
+        string external_id = 3;
+    }
+    structures.PaymentType type = 4;
 }
 
 message GetStatusResponse {
-    Status status = 1;
-
-    enum Status {
-        NOT_COFIRMED = 0;
-        CONFIRMED = 1;
-        CANCELED = 2;
-    }
+    structures.PaymentStatus status = 1;
 }
 

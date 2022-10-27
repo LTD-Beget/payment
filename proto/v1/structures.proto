@@ -40,10 +40,17 @@ enum PaymentType {
     CLOUDPAYMENTS = 14;
     PAYBOX = 15;
     PAYSELECTION = 16;
+    PAYKEEPER = 17;
 }
 
 enum Country {
     OTHER = 0;
     RU = 1;
     UA = 2;
+}
+
+enum PaymentStatus {
+    NOT_COFIRMED = 0;
+    CONFIRMED = 1;
+    CANCELED = 2;
 }
