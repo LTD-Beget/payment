@@ -290,14 +290,23 @@ message CreateResponse {
 
 message GetStatusRequest {
     reserved 1;
-    oneof identifier {
-        // Идентификатор платежа
-        uint32 payment_id = 2;
-        // Внешний ID
-        string external_id = 3;
+    oneof SearchScope {
+        // Поиск по ID платежа
+        ByPaymentId by_payment_id = 2;
+        // Поиск по внешнему ID
+        ByExternalId by_external_id = 3;
+
     }
-    // Тип платежа
-    structures.PaymentType type = 4;
+    message ByPaymentId {
+        // ID платежа
+        uint32 payment_id = 1;
+    }
+    message ByExternalId {
+        // Внешний ID (ID платежного шлюза)
+        string external_id = 1;
+        // Тип платежа
+        structures.PaymentType type = 2;
+    }
 }
 
 message GetStatusResponse {
