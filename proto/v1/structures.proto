@@ -40,6 +40,7 @@ enum PaymentType {
     CLOUDPAYMENTS = 14;
     PAYBOX = 15;
     PAYSELECTION = 16;
+    PAYKEEPER = 17;
 }
 
 enum Country {
