@@ -169,6 +169,7 @@ message CreateRequest {
         PayBoxParams paybox = 15;
         PayselectionParams payselection = 16;
         PaykeeperParams paykeeper = 17;
+        PaykeeperParams paykeeper_alfa = 18;
     }
 
     // идентификатор получателя платежа
