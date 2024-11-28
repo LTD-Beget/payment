@@ -7,6 +7,7 @@ enum RecurringPeriod {
     MONTH = 1;
     YEAR = 2;
     TWO_YEARS = 3;
+    ANY = 4;
 }
 
 enum Currency {

@@ -41,6 +41,8 @@ message GetInfoResponse {
     bool was_used = 1;
     // достингуто ограничение на число попыток привязки карты
     bool limit_reached = 4;
+    // список включенных опций
+    repeated string enabled_option = 5;
 
     oneof state {
         NotBinded not_binded = 2;
