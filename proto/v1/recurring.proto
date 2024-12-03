@@ -41,6 +41,8 @@ message GetInfoResponse {
     bool was_used = 1;
     // достингуто ограничение на число попыток привязки карты
     bool limit_reached = 4;
+    // список включенных опций
+    repeated Option option = 5;
 
     oneof state {
         NotBinded not_binded = 2;
@@ -54,6 +56,10 @@ message GetInfoResponse {
         uint32 fail_charges = 3;
         string card = 4;
         structures.Currency currency = 5;
+    }
+
+    message Option {
+        string name = 1;
     }
 }
 
