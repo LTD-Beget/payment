@@ -170,6 +170,7 @@ message CreateRequest {
         PayselectionParams payselection = 16;
         PaykeeperParams paykeeper = 17;
         PaykeeperParams paykeeper_alfa = 18;
+        OneVisionParams onevision = 19;
     }
 
     // идентификатор получателя платежа
@@ -239,6 +240,9 @@ message CreateRequest {
     }
     // Оплата через Paykeeeper (СБП)
     message PaykeeperParams {
+    }
+    message OneVisionParams {
+        string return_url = 1;
     }
     enum Source {
         UNKNOWN = 0;
