@@ -170,7 +170,7 @@ message CreateRequest {
         PayselectionParams payselection = 16;
         PaykeeperParams paykeeper = 17;
         PaykeeperParams paykeeper_alfa = 18;
-        OneVisionParams onevision = 19;
+        OneVisionParams onevision = 19 [deprecated=true];
         PaysageParams paysage = 20;
     }
 
