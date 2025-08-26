@@ -43,7 +43,8 @@ enum PaymentType {
     PAYSELECTION = 16;
     PAYKEEPER = 17;
     PAYKEEPER_ALFA = 18;
-    ONEVISION = 19;
+    ONEVISION = 19 [deprecated=true];
+    PAYSAGE = 20;
 }
 
 enum Country {

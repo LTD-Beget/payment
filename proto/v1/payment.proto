@@ -170,7 +170,8 @@ message CreateRequest {
         PayselectionParams payselection = 16;
         PaykeeperParams paykeeper = 17;
         PaykeeperParams paykeeper_alfa = 18;
-        OneVisionParams onevision = 19;
+        OneVisionParams onevision = 19 [deprecated=true];
+        PaysageParams paysage = 20;
     }
 
     // идентификатор получателя платежа
@@ -242,6 +243,9 @@ message CreateRequest {
     message PaykeeperParams {
     }
     message OneVisionParams {
+        string return_url = 1;
+    }
+    message PaysageParams {
         string return_url = 1;
     }
     enum Source {
